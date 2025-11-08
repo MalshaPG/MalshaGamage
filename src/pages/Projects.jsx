@@ -18,7 +18,7 @@ export default function Projects() {
       tech: "React, Flask, MongoDB, YOLOv8, Firebase, Cloudinary",
       timeline: "Sep 2024 – June 2025",
       link: "https://coastalcanopy.org.lk/",
-      img: "/mangroves.jpg",
+      img: "mangroves.jpg",
       repo: "https://github.com/MalshaPG/CoastalCanopy_CS149",
     },
     {
@@ -28,7 +28,7 @@ export default function Projects() {
       timeline: "Oct 2025",
       link: null,
       repo: "https://github.com/MalshaPG/Student-Teacher-Task-Management-Application",
-      img: "/st-te.jpg",
+      img: "st-te.jpg",
     },
     {
       title: "Event Ticketing System",
@@ -37,7 +37,7 @@ export default function Projects() {
       timeline: "Sep 2024 – Dec 2024",
       link: null,
       repo: "https://github.com/MalshaPG/Real_time_event_ticketing_system_fullStack",
-      img: "/ticket.jpg",
+      img: "ticket.jpg",
     },
     {
       title: "Transaction Tracker API",
@@ -46,7 +46,7 @@ export default function Projects() {
       timeline: "Mar 2025 – May 2025",
       link: null,
       repo: "https://github.com/MalshaPG/transaction-tracker",
-      img: "/transaction.jpg",
+      img: "transaction.jpg",
     },
     {
       title: "Bookstore RESTful API",
@@ -55,7 +55,7 @@ export default function Projects() {
       timeline: "January 2024",
       link: null,
       repo: "https://github.com/MalshaPG/bookstore_api",
-      img: "/bookstore.jpg",
+      img: "bookstore.jpg",
     },
   ];
 

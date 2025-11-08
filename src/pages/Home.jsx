@@ -13,7 +13,7 @@ export default function Home() {
         {/* --- Image Side --- */}
         <div className="w-full md:w-1/2 flex justify-center mb-10 md:mb-0">
           <img
-            src="/me.jpg"
+            src="me.jpg"
             alt="Profile"
             className="w-80 h-80 object-cover rounded-full shadow-2xl hover:scale-105 transition-transform duration-700 ease-in-out"
           />
