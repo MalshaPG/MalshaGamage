@@ -8,7 +8,7 @@ import './index.css';
 
 export default function App() {
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       {/* Animated gradient background */}
       <div className="relative min-h-screen text-white font-sans overflow-hidden">
         <div className="absolute inset-0 bg-gradient-animate -z-10"></div>
