@@ -1,113 +1,98 @@
-import { useState } from 'react';
-import emailjs from '@emailjs/browser';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('');
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false); 
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true); // show spinner
+
     emailjs
       .send(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
+        "service_frxqjcc",
+        "template_wmcskov",
         {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
         },
-        'YOUR_PUBLIC_KEY'
+        "L9W9-cOwhOXrL7ZxD"
       )
-      .then(() => setStatus('✅ Message sent successfully!'))
+      .then(() => {
+        setStatus("✅ Message sent successfully!");
+        setFormData({ name: "", email: "", message: "" });
+      })
       .catch((error) => {
-        console.error('EmailJS Error:', error);
-        setStatus('❌ Failed to send message. Please try again.');
+        console.error("EmailJS Error:", error);
+        setStatus("❌ Failed to send message. Please try again.");
+      })
+      .finally(() => {
+        setLoading(false); // 👈 hide spinner
+        setTimeout(() => setStatus(""), 4000); // hide status after 4s
       });
   };
 
   return (
-    <section className="max-w-lg mx-auto text-center space-y-10 animate-fadeIn bg-white/70 backdrop-blur-md p-6 rounded-xl">
-      {/* Encouraging Heading */}
-      <div>
-        <h2 className="text-3xl font-bold text-blue-700 mb-3">Let’s Build Something Amazing Together 💡</h2>
-        <p className="text-gray-700 max-w-md mx-auto">
-          I’m always excited to connect with people who love technology and creativity.  
-          Whether it’s a project idea, internship opportunity, or just a tech chat — feel free to reach out!
-        </p>
-      </div>
+    <section className="relative max-w-3xl mx-auto py-16 text-center">
+      <h2 className="text-4xl font-bold mb-6 text-white-700">Let's Connect!</h2>
 
-      {/* Contact Form */}
-      <form
-        onSubmit={handleSubmit}
-        className="p-6 rounded-xl shadow space-y-4"
-      >
+      <form onSubmit={handleSubmit} className="space-y-4 text-left bg-white/80 p-8 rounded-xl shadow-lg backdrop-blur-md">
+        <p className="text-gray-700 mb-8">
+          I’d love to collaborate or discuss new opportunities. Feel free to drop a message — I’ll get back to you soon!
+        </p>
+
         <input
           type="text"
           name="name"
           placeholder="Your Name"
+          value={formData.name}
           onChange={handleChange}
           required
-          className="w-full border rounded-lg px-3 py-2"
+          className="text-black w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
         <input
           type="email"
           name="email"
           placeholder="Your Email"
+          value={formData.email}
           onChange={handleChange}
           required
-          className="w-full border rounded-lg px-3 py-2"
+          className="text-black w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
         <textarea
           name="message"
           placeholder="Your Message"
-          rows="4"
+          value={formData.message}
           onChange={handleChange}
           required
-          className="w-full border rounded-lg px-3 py-2"
-        ></textarea>
+          className="text-black w-full p-3 border border-gray-300 rounded-md h-32 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
         <button
           type="submit"
-          className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+          disabled={loading}
+          className={`w-full py-3 font-semibold text-white rounded-md transition ${
+            loading ? "bg-blue-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+          }`}
         >
-          Send Message
+          {loading ? "Sending..." : "Send Message"}
         </button>
-        {status && <p className="text-center mt-3">{status}</p>}
       </form>
 
-      {/* Connect With Me Section */}
-      <div className="mt-8">
-        <h3 className="text-xl font-semibold text-blue-700 mb-4">Connect With Me</h3>
-        <p className="text-gray-700 mb-3">
-          Let’s stay in touch and grow together — I’d love to hear from you!
-        </p>
-        <div className="flex justify-center gap-6 text-3xl text-gray-600">
-          <a
-            href="https://github.com/MalshaPG"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-700 transition transform hover:-translate-y-1"
-          >
-            <FaGithub />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/malsha-gamage-633074293"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-700 transition transform hover:-translate-y-1"
-          >
-            <FaLinkedin />
-          </a>
-          <a
-            href="mailto:malsha.20232325@iit.ac.lk"
-            className="hover:text-blue-700 transition transform hover:-translate-y-1"
-          >
-            <FaEnvelope />
-          </a>
+      {status && <p className="mt-4 text-lg">{status}</p>}
+
+      {/* 🔵 Loading overlay */}
+      {loading && (
+        <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-600 border-t-transparent"></div>
         </div>
-      </div>
+      )}
     </section>
   );
 }

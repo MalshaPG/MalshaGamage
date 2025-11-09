@@ -1,5 +1,5 @@
 // src/App.jsx
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import SkillsEducation from './pages/SkillsEducation';
@@ -8,7 +8,7 @@ import './index.css';
 
 export default function App() {
   return (
-    <BrowserRouter basename="/MalshaGamage">
+    <Router>
       {/* Animated gradient background */}
       <div className="relative min-h-screen text-white font-sans overflow-hidden">
         <div className="absolute inset-0 bg-gradient-animate -z-10"></div>
@@ -41,7 +41,6 @@ export default function App() {
             >
               Contact
             </Link>
-
           </div>
         </nav>
 
@@ -55,6 +54,6 @@ export default function App() {
           </Routes>
         </div>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }
